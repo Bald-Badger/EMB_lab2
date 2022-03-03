@@ -51,7 +51,7 @@ char usb_to_ascii(uint8_t k0, uint8_t k1, uint8_t k2) {
 	} else if (KEY_1 <= k1 || k1 <= 0x26) {// 1-9
 		ascii = k1 + (49 - KEY_1);
 	} else {
-		ascii = (uint8_t)" ";
+		ascii = 0;
 	}
 	return (char) ascii;
 }

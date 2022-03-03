@@ -158,7 +158,6 @@ void *network_thread_f(void *ignored)
 
 
 void *input_thread_f(void *ignored) {
-	int err;
 	struct usb_keyboard_packet packet;
 	int transferred;
 	char keystate[12];
@@ -184,6 +183,6 @@ void *input_thread_f(void *ignored) {
 			} 
 		}
 	}
-	return;
+	return NULL;
 }
 

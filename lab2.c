@@ -224,11 +224,11 @@ void *input_thread_f(void *ignored) {
 				if (cursor < COLS) {
 					memcpy(message_l1, &message[0], COLS * sizeof(*message));
 					fbputs(message_l1, USER_INPUT_L1, 0);
-				}
-				if (cursor >= COLS) {
+				} else {
 					memcpy(message_l2, &message[COLS-1], COLS * sizeof(*message));
 					fbputs(message_l2, USER_INPUT_L2, 0);
 				}
+
 				if (cursor <= COLS) {
 					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L1, cursor);
 				} else {

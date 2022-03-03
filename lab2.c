@@ -84,10 +84,10 @@ int main()
 
 	struct sockaddr_in serv_addr;
 
-	struct usb_keyboard_packet packet;
-	int transferred;
-	char keystate[12];
-	char key[1];
+	//struct usb_keyboard_packet packet;
+	//int transferred;
+	//char keystate[12];
+	//char key[1];
 
 	if ((err = fbopen()) != 0) {
 		fprintf(stderr, "Error: Could not open framebuffer: %d\n", err);
@@ -184,5 +184,6 @@ void *input_thread_f(void *ignored) {
 			} 
 		}
 	}
+	return;
 }
 

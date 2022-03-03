@@ -100,7 +100,6 @@ int main()
 	}
 
 	fbclear();
-	// sanity_test();
 	print_canvas();
 
 	/* Open the keyboard */
@@ -195,6 +194,7 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
+				fbputs(message, USER_INPUT_L1, 0);
 			}
 
 			// change the input to ascii
@@ -204,7 +204,7 @@ void *input_thread_f(void *ignored) {
 			if (key != ASCII_NULL) {
 				message[cursor] = key;
 				cursor ++;
-				fbputs(message, USER_INPUT_L1, cursor);
+				fbputs(message, USER_INPUT_L1, 0);
 			} 
 		}
 	}

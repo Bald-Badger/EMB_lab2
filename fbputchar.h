@@ -8,7 +8,7 @@
 #define FBOPEN_BPP -5          /* Unexpected bits-per-pixel */
 
 #define ROWS 24
-#define COLS 63
+#define COLS 64
 
 extern int fbopen(void);
 extern void fbputchar(char, int, int);

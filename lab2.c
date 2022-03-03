@@ -139,10 +139,9 @@ int main()
 	/* Start the network thread */
 	pthread_create(&network_thread, NULL, network_thread_f, NULL);
 
-	/* Start the network thread */
+	/* Start the input thread */
 	pthread_create(&input_thread, NULL, input_thread_f, NULL);
 	pthread_join(input_thread, NULL);
-
 
 	/* Terminate the network thread */
 	pthread_cancel(network_thread);
@@ -162,6 +161,7 @@ void *network_thread_f(void *ignored)
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
 		fbputs(recvBuf, 8, 0);
+		printf("WTF\n");
 	}
 
 	return NULL;

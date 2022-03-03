@@ -221,10 +221,10 @@ void *input_thread_f(void *ignored) {
 				}
 				message[cursor] = key;
 				cursor ++;
-				memcpy(message_l1, &message[0], COLS);
+				memcpy(message_l1, &message[0], COLS * sizeof(*message));
 				fbputs(message_l1, USER_INPUT_L1, 0);
 				if (cursor >= COLS) {
-					memcpy(message_l2, &message[COLS-1], COLS);
+					memcpy(message_l2, &message[COLS-1], COLS * sizeof(*message));
 					fbputs(message_l2, USER_INPUT_L2, 0);
 				}
 				if (cursor <= COLS) {
@@ -232,7 +232,6 @@ void *input_thread_f(void *ignored) {
 				} else {
 					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L2, cursor-COLS);
 				}
-				printf("%s\n", message);
 			} 
 		}
 	}

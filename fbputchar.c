@@ -115,7 +115,7 @@ void fbclear() {
 	uint8_t null_char = 0;
 	memset(framebuffer,0,sizeof((const char *)framebuffer));
 	for (int i = 0; i < strlen(framebuffer); i++) {
-		framebuffer[i] = (char)null_char
+		framebuffer[i] = (char)null_char;
 	}
 }
 

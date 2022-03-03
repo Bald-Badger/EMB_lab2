@@ -46,12 +46,13 @@ void sanity_test() {
 		fbputchar('*', 23, col);
 	}
 
-	fbputs("Hello CSEE 4840 World!", 4, 10);
+	fbputs("Test Text", 4, 10);
 }
+
 
 int main()
 {
-	int err, col;
+	int err;
 
 	struct sockaddr_in serv_addr;
 
@@ -64,6 +65,7 @@ int main()
 		exit(1);
 	}
 
+	fbclear();
 	sanity_test();
 
 	/* Open the keyboard */

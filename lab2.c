@@ -86,12 +86,15 @@ void print_canvas() {
 }
 
 void clear_input_space() {
-	for (int col = 0; col < COLS; col++) {
-		fbputs(" ", USER_INPUT_L1, col);
+	for (int row = SEPREATOR_ROW + 1; row < ROWS; row ++) {
+		for (int col = 0; col < COLS; col++) {
+			fbputs(" ", row, col);
+		}
 	}
-	for (int col = 0; col < COLS; col++) {
-		fbputs(" ", USER_INPUT_L2, col);
-	}
+}
+
+void clear_chat_space() {
+
 }
 
 
@@ -156,12 +159,13 @@ void *network_thread_f(void *ignored)
 {
 	char recvBuf[BUFFER_SIZE];
 	int n;
+	int line
 	/* Receive data */
 	while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
 		fbputs(recvBuf, 8, 0);
-		printf("WTF\n");
+		
 	}
 
 	return NULL;

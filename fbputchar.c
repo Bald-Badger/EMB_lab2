@@ -129,7 +129,6 @@ void scroll_input_space(int line) {
 	int end_index = ROWS * COLS * PIXEL_SIZE;
 
 	memmove(&framebuffer[base_index], &framebuffer[start_index], end_index - start_index);
-	return
 } 
 
 

@@ -39,6 +39,9 @@ uint8_t endpoint_address;
 pthread_t network_thread;
 void *network_thread_f(void *);
 
+pthread_t input_thread;
+void *input_thread_f(void *);
+
 int CAPS = 0; // 1 if caps lock is on
 int exit_flag = 0; // 1 then exit
 
@@ -125,26 +128,10 @@ int main()
 	/* Start the network thread */
 	pthread_create(&network_thread, NULL, network_thread_f, NULL);
 
-	/* Look for and handle keypresses */
-	for (;;) {
-		libusb_interrupt_transfer(keyboard, endpoint_address,
-						(unsigned char *) &packet, sizeof(packet),
-						&transferred, 0);
+	/* Start the network thread */
+	pthread_create(&input_thread, NULL, input_thread_f, NULL);
+	pthread_join(input_thread, NULL);
 
-		if (transferred == sizeof(packet)) {
-			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0],
-				packet.keycode[1]);
-			printf("%s\n", keystate);
-			fbputs(keystate, 6, 0); // write the key hex to the frame buffer
-			if (packet.keycode[0] == 0x29) { /* ESC pressed? */
-				break;
-			}
-			key[0] = usb_to_ascii(packet.keycode[0]);
-			if (key[0] != ASCII_NULL) {
-				fbputs(key, 10, 0);
-			} 
-		}
-	}
 
 	/* Terminate the network thread */
 	pthread_cancel(network_thread);
@@ -169,12 +156,33 @@ void *network_thread_f(void *ignored)
 	return NULL;
 }
 
-/*
+/
 void *input_thread_f(void *ignored) {
 	int err;
 	struct usb_keyboard_packet packet;
 	int transferred;
 	char keystate[12];
 	char key[1];
+
+		/* Look for and handle keypresses */
+	for (;;) {
+		libusb_interrupt_transfer(keyboard, endpoint_address,
+						(unsigned char *) &packet, sizeof(packet),
+						&transferred, 0);
+
+		if (transferred == sizeof(packet)) {
+			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0],
+				packet.keycode[1]);
+			printf("%s\n", keystate);
+			fbputs(keystate, 6, 0); // write the key hex to the frame buffer
+			if (packet.keycode[0] == 0x29) { /* ESC pressed? */
+				break;
+			}
+			key[0] = usb_to_ascii(packet.keycode[0]);
+			if (key[0] != ASCII_NULL) {
+				fbputs(key, 10, 0);
+			} 
+		}
+	}
 }
-*/
+

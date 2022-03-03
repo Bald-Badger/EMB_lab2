@@ -225,4 +225,6 @@ extern void fbclear(void);
 #define KEY_MEDIA_COFFEE 0xf9
 #define KEY_MEDIA_REFRESH 0xfa
 #define KEY_MEDIA_CALC 0xfb
+
+#define ASCII_NULL 0x00
 #endif

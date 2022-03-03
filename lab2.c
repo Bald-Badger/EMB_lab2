@@ -140,7 +140,7 @@ int main()
 				break;
 			}
 			key[0] = usb_to_ascii(packet.keycode[0]);
-			if (key[0] != "\0") {
+			if (key[0] != ASCII_NULL) {
 				fbputs(key, 8, 0);
 			} 
 		}

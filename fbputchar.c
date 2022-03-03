@@ -127,10 +127,6 @@ void fbclear() {
 
 void scroll_one_row (int row, int line) {
 	if (line > row) {return}
-	source_index = row * COLS * CHAR_SIZE;
-	target_index = (row-line) * COLS * CHAR_SIZE;
-	move_len = CHAR_SIZE * COLS;
-	memmove(&framebuffer[])
 }
 
 void scroll_input_space(int line) {

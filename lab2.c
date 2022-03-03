@@ -217,7 +217,7 @@ void *input_thread_f(void *ignored) {
 			if (key != ASCII_NULL) {
 				if (cursor >= MAX_MSG_LEN) {
 					printf("max message len reached!\n");
-					break;
+					continue;
 				}
 				message[cursor] = key;
 				cursor ++;

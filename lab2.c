@@ -43,16 +43,15 @@ int CAPS = 0; // 1 if caps lock is on
 
 char usb_to_ascii(uint8_t k1) {
 	// if the key is among a-z
-	uint8_t ascii = 0;
+	uint8_t ascii = ASCII_NULL;
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
 		ascii = k1 + 93;
-	} else if (k1 == KEY_0) {// special case
-		ascii = 48;
-	} else if (KEY_1 <= k1 || k1 <= 0x26) {// 1-9
-		ascii = k1 + 0x13;
-	} else {
-		ascii = 0;
+	} 
+
+	else if (k1 == KEY_SPACE) {
+		ascii = ASCII_SPACE;
 	}
+
 	return (char) ascii;
 }
 

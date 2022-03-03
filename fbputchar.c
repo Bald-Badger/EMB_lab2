@@ -49,6 +49,12 @@ int fbopen()
 	return 0;
 }
 
+char* get_pixel_index (int row, int col) {
+	return framebuffer +
+		(row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length +
+		(col * FONT_WIDTH * 2 + fb_vinfo.xoffset) * BITS_PER_PIXEL / 8;
+}
+
 /*
  * Draw the given character at the given row/column.
  * fbopen() must be called first.
@@ -61,6 +67,7 @@ void fbputchar(char c, int row, int col)
 	unsigned char *pixel, *left = framebuffer +
 		(row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length +
 		(col * FONT_WIDTH * 2 + fb_vinfo.xoffset) * BITS_PER_PIXEL / 8;
+
 	for (y = 0 ; y < FONT_HEIGHT * 2 ; y++, left += fb_finfo.line_length) {
 		pixels = *pixelp;
 		pixel = left;
@@ -117,6 +124,14 @@ void fbclear() {
 	}
 }
 
+
+void scroll_one_row (int row, int line) {
+	if (line > row) {return}
+	source_index = row * COLS * CHAR_SIZE;
+	target_index = (row-line) * COLS * CHAR_SIZE;
+	move_len = CHAR_SIZE * COLS;
+	memmove(&framebuffer[])
+}
 
 void scroll_input_space(int line) {
 	if (line + SEPREATOR_ROW >= ROWS) {

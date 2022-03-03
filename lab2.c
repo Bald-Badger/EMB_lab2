@@ -215,6 +215,10 @@ void *input_thread_f(void *ignored) {
 			key = usb_to_ascii(packet.keycode[0]);
 
 			if (key != ASCII_NULL) {
+				if (cursor >= MAX_MSG_LEN) {
+					printf("max message len reached!\n");
+					break;
+				}
 				message[cursor] = key;
 				cursor ++;
 				memcpy(message_l1, message, COLS);

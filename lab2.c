@@ -222,7 +222,7 @@ void *input_thread_f(void *ignored) {
 				memcpy(message_l1, message, COLS);
 				fbputs(message_l1, USER_INPUT_L1, 0);
 				if (cursor >= COLS) {
-					memcpy(message_l2, &a[COLS-1], COLS);
+					memcpy(message_l2, &message[COLS-1], COLS);
 					fbputs(message_l2, USER_INPUT_L2, 0);
 				}
 			} 

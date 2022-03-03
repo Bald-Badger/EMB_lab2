@@ -41,7 +41,7 @@ void *network_thread_f(void *);
 
 int CAPS = 0; // 1 if caps lock is on
 
-char usb_to_ascii(uint8_t k0, uint8_t k1, uint8_t k2) {
+char usb_to_ascii(uint8_t k1) {
 	// if the key is among a-z
 	uint8_t ascii = 0;
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
@@ -72,7 +72,6 @@ void print_canvas() {
 		fbputchar('-', 20, col);
 	}
 
-
 }
 
 
@@ -85,6 +84,7 @@ int main()
 	struct usb_keyboard_packet packet;
 	int transferred;
 	char keystate[12];
+	char key[1];
 
 	if ((err = fbopen()) != 0) {
 		fprintf(stderr, "Error: Could not open framebuffer: %d\n", err);
@@ -130,14 +130,19 @@ int main()
 		libusb_interrupt_transfer(keyboard, endpoint_address,
 						(unsigned char *) &packet, sizeof(packet),
 						&transferred, 0);
+
 		if (transferred == sizeof(packet)) {
 			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0],
 				packet.keycode[1]);
 			printf("%s\n", keystate);
 			fbputs(keystate, 6, 0); // write the key hex to the frame buffer
 			if (packet.keycode[0] == 0x29) { /* ESC pressed? */
-	break;
+				break;
 			}
+			key[0] = usb_to_ascii(packet.keycode[0]);
+			if (key[0] != "\0") {
+				fbputs(key, 8, 0);
+			} 
 		}
 	}
 

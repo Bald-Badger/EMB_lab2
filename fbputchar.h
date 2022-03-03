@@ -230,6 +230,7 @@ extern void fbclear(void);
 #define ASCII_0 0x30
 #define ASCII_1 0x31
 #define ASCII_SPACE 0x20
+#define ASCII_UNDERSCORE 0x5f
 
 
 #endif

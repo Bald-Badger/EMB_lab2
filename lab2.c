@@ -26,7 +26,9 @@
 #define MAX_MSG_LEN COLS * 2	// 128
 #define SEPREATOR_ROW 20
 #define USER_INPUT_L1 21
-#define USER_INPUT_L2 22
+#define CURSOR_L1 22
+#define USER_INPUT_L2 23
+#define CURSOR_L2 24
 
 /*
  * References:
@@ -179,6 +181,8 @@ void *input_thread_f(void *ignored) {
 	char keystate[12];
 	char key;
 	char message[MAX_MSG_LEN];
+	char message_l1[COLS];
+	char message_l2[COLS];
 	int cursor = 0;
 	
 
@@ -215,7 +219,12 @@ void *input_thread_f(void *ignored) {
 			if (key != ASCII_NULL) {
 				message[cursor] = key;
 				cursor ++;
-				fbputs(message, USER_INPUT_L1, 0);
+				memcpy(message_l1, message, COLS);
+				fbputs(message_l1, USER_INPUT_L1, 0);
+				if (cursor >= COLS) {
+					memcpy(message_l2, &a[COLS-1], COLS);
+					fbputs(message_l2, USER_INPUT_L2, 0);
+				}
 			} 
 		}
 	}

@@ -201,7 +201,7 @@ void *input_thread_f(void *ignored) {
 			key = usb_to_ascii(packet.keycode[0]);
 
 
-			if (key[0] != ASCII_NULL) {
+			if (key != ASCII_NULL) {
 				message[cursor] = key;
 				cursor ++;
 				fbputs(message, USER_INPUT_L1, cursor);

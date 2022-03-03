@@ -39,6 +39,23 @@ uint8_t endpoint_address;
 pthread_t network_thread;
 void *network_thread_f(void *);
 
+int CAPS = 0; // 1 if caps lock is on
+
+char usb_to_ascii(uint8_t k0, uint8_t k1, uint8_t k2) {
+	// if the key is among a-z
+	uint8_t ascii = 0;
+	if (KEY_A <= k1 || k1 <= KEY_Z) {
+		ascii = k1 + 93;
+	} else if (k1 == KEY_0) {// special case
+		ascii = 48
+	} else if (KEY_1 <= k1 || k1 <= 0x26) {// 1-9
+		ascii = k1 + (49 - KEY_1);
+	} else {
+		ascii = (uint8_t)" ";
+	}
+	return (char) ascii;
+}
+
 void sanity_test() {
 	/* Draw rows of asterisks across the top and bottom of the screen */
 	for (int col = 0 ; col < 64 ; col++) {
@@ -54,6 +71,8 @@ void print_canvas() {
 	for (int col = 0 ; col < COLS ; col++) {
 		fbputchar('-', 20, col);
 	}
+
+
 }
 
 

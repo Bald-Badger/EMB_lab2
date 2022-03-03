@@ -232,6 +232,7 @@ void *input_thread_f(void *ignored) {
 				} else {
 					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L2, cursor-COLS);
 				}
+				printf("%s\n", message);
 			} 
 		}
 	}

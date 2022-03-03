@@ -1,6 +1,14 @@
 #ifndef _FBPUTCHAR_H
 #  define _FBPUTCHAR_H
 
+#define FBDEV "/dev/fb0"
+
+#define FONT_WIDTH 8
+#define FONT_HEIGHT 16
+#define BITS_PER_PIXEL 32
+#define PIXEL_SIZE BITS_PER_PIXEL/8
+#define CHAR_SIZE PIXEL_SIZE*FONT_WIDTH*FONT_HEIGHT
+
 #define FBOPEN_DEV -1          /* Couldn't open the device */
 #define FBOPEN_FSCREENINFO -2  /* Couldn't read the fixed info */
 #define FBOPEN_VSCREENINFO -3  /* Couldn't read the variable info */
@@ -17,10 +25,6 @@ extern void fbclear(void);
 
 
 // source: https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2
-/**
- * Modifier masks - used for the first byte in the HID report.
- * NOTE: The second byte in the report is reserved, 0x00
- */
 #define KEY_MOD_LCTRL  0x01
 #define KEY_MOD_LSHIFT 0x02
 #define KEY_MOD_LALT   0x04

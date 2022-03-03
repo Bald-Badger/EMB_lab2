@@ -28,6 +28,7 @@
 #define USER_INPUT_L1 21
 #define USER_INPUT_L2 23
 
+
 /*
  * References:
  *
@@ -85,6 +86,16 @@ void print_canvas() {
 
 }
 
+
+void clear_chat_space() {
+	for (int row = 0; row < SEPREATOR_ROW; row ++) {
+		for (int col = 0; col < COLS; col++) {
+			fbputs(" ", row, col);
+		}
+	}
+}
+
+
 void clear_input_space() {
 	for (int row = SEPREATOR_ROW + 1; row < ROWS; row ++) {
 		for (int col = 0; col < COLS; col++) {
@@ -93,9 +104,9 @@ void clear_input_space() {
 	}
 }
 
-void clear_chat_space() {
-
-}
+void scroll_input_space(int line) {
+	int start_index = SEPREATOR_ROW * COLS * 
+} 
 
 
 int main()

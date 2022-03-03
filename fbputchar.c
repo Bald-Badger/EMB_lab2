@@ -19,12 +19,6 @@
 
 #include <linux/fb.h>
 
-#define FBDEV "/dev/fb0"
-
-#define FONT_WIDTH 8
-#define FONT_HEIGHT 16
-#define BITS_PER_PIXEL 32
-
 struct fb_var_screeninfo fb_vinfo;
 struct fb_fix_screeninfo fb_finfo;
 unsigned char *framebuffer;

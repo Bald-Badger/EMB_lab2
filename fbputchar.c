@@ -49,7 +49,7 @@ int fbopen()
 	return 0;
 }
 
-char* get_pixel_index (int row, int col) {
+unsigned char* get_pixel_index (int row, int col) {
 	return framebuffer + 
 	(row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length + 
 	(col * FONT_WIDTH * 2 + fb_vinfo.xoffset) * BITS_PER_PIXEL / 8;

@@ -50,7 +50,10 @@ void sanity_test() {
 }
 
 void print_canvas() {
-	
+	// draw a hoirizonta line
+	for (int col = 0 ; col < COLS ; col++) {
+		fbputchar('-', 20, col);
+	}
 }
 
 
@@ -70,7 +73,8 @@ int main()
 	}
 
 	fbclear();
-	sanity_test();
+	// sanity_test();
+	print_canvas();
 
 	/* Open the keyboard */
 	if ( (keyboard = openkeyboard(&endpoint_address)) == NULL ) {

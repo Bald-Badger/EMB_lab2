@@ -206,7 +206,7 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
-				fbputs(message, USER_INPUT_L1, 0);
+				clear_input_space();
 			}
 
 			// change the input to ascii

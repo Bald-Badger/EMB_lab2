@@ -22,6 +22,7 @@ extern int fbopen(void);
 extern void fbputchar(char, int, int);
 extern void fbputs(const char *, int, int);
 extern void fbclear(void);
+extern void scroll_input_space(int);
 
 
 // source: https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2

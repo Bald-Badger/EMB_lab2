@@ -104,10 +104,6 @@ void clear_input_space() {
 	}
 }
 
-void scroll_input_space(int line) {
-	int start_index = SEPREATOR_ROW * COLS * PIXEL_SIZE;
-} 
-
 
 int main()
 {
@@ -216,7 +212,8 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
-				clear_input_space();
+				//clear_input_space();
+				scroll_input_space(1);
 			}
 
 			// change the input to ascii

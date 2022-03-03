@@ -116,6 +116,22 @@ void fbclear() {
 	}
 }
 
+
+void scroll_input_space(int line) {
+	if (line + SEPREATOR_ROW >= ROWS) {
+		printf("cannot row that much!");
+		return;
+	}
+	int base_index = (SEPREATOR_ROW + 1) * COLS * PIXEL_SIZE;
+	int offset = line * COLS * PIXEL_SIZE;
+	int start_index = base_index + offset;
+	int end_index = ROWS * COLS * PIXEL_SIZE;
+
+	memmove(&framebuffer[base_index], &framebuffer[start_index], offset);
+
+} 
+
+
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz
 
 od --address-radix=n --width=16 -v -t x1 -j 4 -N 2048 lat0-16.psfu

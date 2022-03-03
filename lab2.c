@@ -85,6 +85,15 @@ void print_canvas() {
 
 }
 
+void clear_input_space() {
+	for (int col = 0; col < COLS; col++) {
+		fbputs(" ", USER_INPUT_L1, col);
+	}
+	for (int col = 0; col < COLS; col++) {
+		fbputs(" ", USER_INPUT_L2, col);
+	}
+}
+
 
 int main()
 {

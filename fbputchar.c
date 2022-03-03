@@ -120,7 +120,7 @@ clears the frame buffer
 void fbclear() {
 	for (int row = 0; row < ROWS; row++) {
 		for (int col = 0; col < COLS; col++) {
-			fbputs("", row, col);
+			fbputs(" ", row, col);
 		}
 	}
 }

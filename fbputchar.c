@@ -25,9 +25,6 @@
 #define FONT_HEIGHT 16
 #define BITS_PER_PIXEL 32
 
-#define ROWS 24
-#define COLS 64
-
 struct fb_var_screeninfo fb_vinfo;
 struct fb_fix_screeninfo fb_finfo;
 unsigned char *framebuffer;

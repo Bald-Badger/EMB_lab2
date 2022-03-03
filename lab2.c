@@ -49,6 +49,10 @@ void sanity_test() {
 	fbputs("Test Text", 4, 10);
 }
 
+void print_canvas() {
+	
+}
+
 
 int main()
 {

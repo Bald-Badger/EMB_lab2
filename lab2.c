@@ -105,7 +105,7 @@ void clear_input_space() {
 }
 
 void scroll_input_space(int line) {
-	int start_index = SEPREATOR_ROW * COLS * 
+	int start_index = SEPREATOR_ROW * COLS * PIXEL_SIZE;
 } 
 
 

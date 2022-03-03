@@ -49,6 +49,14 @@ void sanity_test() {
 	fbputs("Test Text", 4, 10);
 }
 
+void fbclear() {
+	for (int row = 0; row < ROWS; row++) {
+		for (int col = 0; col < COLS; col++) {
+			fbputs("", row, col);
+		}
+	}
+}
+
 
 int main()
 {

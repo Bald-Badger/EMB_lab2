@@ -25,6 +25,9 @@
 #define FONT_HEIGHT 16
 #define BITS_PER_PIXEL 32
 
+#define ROWS 24
+#define COLS 64
+
 struct fb_var_screeninfo fb_vinfo;
 struct fb_fix_screeninfo fb_finfo;
 unsigned char *framebuffer;
@@ -109,14 +112,6 @@ void fbputs(const char *s, int row, int col)
 {
 	char c;
 	while ((c = *s++) != 0) fbputchar(c, row, col++);
-}
-
-void fbclear() {
-	uint8_t null_char = 0;
-	memset(framebuffer,0,sizeof((const char *)framebuffer));
-	for (int i = 0; i < strlen(framebuffer); i++) {
-		framebuffer[i] = (char)null_char;
-	}
 }
 
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz

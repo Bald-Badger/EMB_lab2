@@ -40,6 +40,7 @@ pthread_t network_thread;
 void *network_thread_f(void *);
 
 int CAPS = 0; // 1 if caps lock is on
+int exit_flag = 0; // 1 then exit
 
 char usb_to_ascii(uint8_t k1) {
 	// if the key is among a-z
@@ -166,5 +167,13 @@ void *network_thread_f(void *ignored)
 	}
 
 	return NULL;
+}
+
+void *input_thread_f(void *ignored) {
+	int err;
+	struct usb_keyboard_packet packet;
+	int transferred;
+	char keystate[12];
+	char key[1];
 }
 

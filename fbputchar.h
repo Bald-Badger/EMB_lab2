@@ -227,4 +227,6 @@ extern void fbclear(void);
 #define KEY_MEDIA_CALC 0xfb
 
 #define ASCII_NULL 0x00
+#define ASCII_0 0x30
+#define ASCII_1 0x31
 #endif

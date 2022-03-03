@@ -50,9 +50,9 @@ int fbopen()
 }
 
 char* get_pixel_index (int row, int col) {
-	return framebuffer +
-		(row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length +
-		(col * FONT_WIDTH * 2 + fb_vinfo.xoffset) * BITS_PER_PIXEL / 8;
+	return framebuffer + 
+	(row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length + 
+	(col * FONT_WIDTH * 2 + fb_vinfo.xoffset) * BITS_PER_PIXEL / 8;
 }
 
 /*
@@ -126,7 +126,7 @@ void fbclear() {
 
 
 void scroll_one_row (int row, int line) {
-	if (line > row) {return}
+	//if (line > row) {return}
 }
 
 void scroll_input_space(int line) {

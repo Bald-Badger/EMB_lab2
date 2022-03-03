@@ -23,6 +23,11 @@
 
 #define BUFFER_SIZE 128
 
+#define MAX_MSG_LEN COLS * 2	// 128
+#define SEPREATOR_ROW 20
+#define USER_INPUT_L1 21
+#define USER_INPUT_L2 22
+
 /*
  * References:
  *
@@ -72,7 +77,7 @@ void sanity_test() {
 void print_canvas() {
 	// draw a hoirizonta line
 	for (int col = 0 ; col < COLS ; col++) {
-		fbputchar('-', 20, col);
+		fbputchar('=', SEPREATOR_ROW, col);
 	}
 
 }
@@ -161,7 +166,10 @@ void *input_thread_f(void *ignored) {
 	struct usb_keyboard_packet packet;
 	int transferred;
 	char keystate[12];
-	char key[1];
+	char key;
+	char message[MAX_MSG_LEN];
+	int cursor = 0;
+	
 
 		/* Look for and handle keypresses */
 	for (;;) {
@@ -172,14 +180,31 @@ void *input_thread_f(void *ignored) {
 		if (transferred == sizeof(packet)) {
 			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0],
 				packet.keycode[1]);
-			printf("%s\n", keystate);
+
+			//printf("%s\n", keystate);
+
 			fbputs(keystate, 6, 0); // write the key hex to the frame buffer
-			if (packet.keycode[0] == 0x29) { /* ESC pressed? */
+
+			if (packet.keycode[0] == KEY_ESC) { /* ESC pressed? */
 				break;
 			}
-			key[0] = usb_to_ascii(packet.keycode[0]);
+
+			if (packet.keycode[0] == KEY_ENTER) {
+				// should send message, clear message for now
+				for (int i = 0; i < MAX_MSG_LEN; i++) {
+					message[i] = ASCII_NULL;
+				}
+				cursor = 0;	// reset cursor
+			}
+
+			// change the input to ascii
+			key = usb_to_ascii(packet.keycode[0]);
+
+
 			if (key[0] != ASCII_NULL) {
-				fbputs(key, 10, 0);
+				message[cursor] = key;
+				cursor ++;
+				fbputs(message, USER_INPUT_L1, cursor);
 			} 
 		}
 	}

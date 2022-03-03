@@ -51,6 +51,9 @@ int CAPS = 0; // 1 if caps lock is on
 int exit_flag = 0; // 1 then exit
 
 char usb_to_ascii(uint8_t k1) {
+	if (k1 == 0x00){
+		return ASCII_NULL;
+	}
 	// if the key is among a-z
 	uint8_t ascii = ASCII_NULL;
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
@@ -199,7 +202,6 @@ void *input_thread_f(void *ignored) {
 
 			// change the input to ascii
 			key = usb_to_ascii(packet.keycode[0]);
-
 
 			if (key != ASCII_NULL) {
 				message[cursor] = key;

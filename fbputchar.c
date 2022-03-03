@@ -112,7 +112,11 @@ void fbputs(const char *s, int row, int col)
 }
 
 void fbclear() {
+	uint8_t null_char = 0;
 	memset(framebuffer,0,sizeof((const char *)framebuffer));
+	for (int i = 0; i < strlen(framebuffer); i++) {
+		framebuffer[i] = (char)null_char
+	}
 }
 
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz

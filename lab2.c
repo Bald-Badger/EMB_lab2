@@ -47,7 +47,7 @@ char usb_to_ascii(uint8_t k0, uint8_t k1, uint8_t k2) {
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
 		ascii = k1 + 93;
 	} else if (k1 == KEY_0) {// special case
-		ascii = 48
+		ascii = 48;
 	} else if (KEY_1 <= k1 || k1 <= 0x26) {// 1-9
 		ascii = k1 + (49 - KEY_1);
 	} else {

@@ -136,7 +136,7 @@ int shift_row (int row, int line) {
 }
 
 int shift_user() {
-	for (int i = (SEPREATOR_ROW + 2); i < ROWS; i++) {
+	for (int i = (SEPREATOR_ROW + 1); i < ROWS; i++) {
 		shift_row(i, 1);
 	}
 }
@@ -286,7 +286,8 @@ void *input_thread_f(void *ignored) {
 
 				if (cursor >= (COLS*2 - 1)) {
 					//cursor = cursor - COLS;
-					//shift_user();
+					cursor --;
+					shift_user();
 				}
 
 				cursor ++;

@@ -137,11 +137,13 @@ int shift_row (int row, int line) {
 	return 0;
 }
 
+
 void shift_user() {
 	for (int i = (SEPREATOR_ROW + 1); i < ROWS; i++) {
 		shift_row(i, 1);
 	}
 }
+
 
 int shift_chat(int line) {
 	if (line > (SEPREATOR_ROW - 1)) {return -1;}

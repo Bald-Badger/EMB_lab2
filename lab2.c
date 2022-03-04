@@ -237,7 +237,7 @@ void *input_thread_f(void *ignored) {
 	int transferred;
 	char keystate[12];
 	char key;
-	//int cursor = 0;
+	int cursor = 0;
 	int valid = 1;
 
 	/* Look for and handle keypresses */
@@ -260,7 +260,7 @@ void *input_thread_f(void *ignored) {
 				for (int i = 0; i < sizeof message; i++) {
 					message[i] = ASCII_NULL;
 				}
-				//cursor = 0;	// reset cursor
+				cursor = 0;	// reset cursor
 				message_ptr = 0;
 				clear_input_space();
 				refresh();
@@ -268,14 +268,25 @@ void *input_thread_f(void *ignored) {
 
 			else if (packet.keycode[0] == KEY_BACKSPACE) {
 				if ((message_ptr / COLS) == 0) {
-					screen[USER_INPUT_L1][message_ptr % COLS] = ASCII_UNDERSCORE;
-					screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_SPACE;
+					if (message_ptr % COLS > 0) {
+						screen[CURSER_L1][message_ptr % COLS - 1] = ASCII_UNDERSCORE;
+					}
+					screen[CURSER_L1][message_ptr % COLS] = ASCII_UNDERSCORE;
+
+					screen[USER_INPUT_L1][message_ptr % COLS] = ASCII_SPACE;
 				} else {
-					screen[USER_INPUT_L2][message_ptr % COLS] = ASCII_UNDERSCORE;
-					screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_SPACE;
+					if (message_ptr % COLS > 0) {
+						screen[CURSER_L2][message_ptr % COLS - 1] = ASCII_UNDERSCORE;
+					}
+					screen[CURSER_L2][message_ptr % COLS] = ASCII_UNDERSCORE;
+
+					screen[USER_INPUT_L2][message_ptr % COLS] = ASCII_SPACE;
 				}
 				if (message_ptr >0) {
 					message_ptr --;
+				}
+				if (cursor > 0) {
+					cursor --;
 				}
 				refresh();
 			}
@@ -307,6 +318,8 @@ void *input_thread_f(void *ignored) {
 
 					message[message_ptr] = key;
 					message_ptr ++;
+					
+					cursor ++;
 					
 					valid = 0;
 

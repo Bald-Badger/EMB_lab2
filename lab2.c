@@ -58,7 +58,7 @@ char usb_to_ascii(uint8_t mod, uint8_t k1) {
 	// if the key is among a-z
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
 		ascii = k1 + 93;
-		if (mod == KEY_LEFTSHIFT || mod == KEY_RIGHTSHIFT) {
+		if (mod == KEY_MOD_LSHIFT || mod == KEY_MOD_RSHIFT) {
 			ascii -= 0x20;
 		}
 	} 

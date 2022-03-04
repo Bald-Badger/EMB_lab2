@@ -279,6 +279,7 @@ void *input_thread_f(void *ignored) {
 				message[message_ptr] = ASCII_SPACE;
 				cursor --;
 				message_ptr --;
+				refresh();
 			}
 
 			// change the input to ascii

@@ -249,7 +249,7 @@ void *input_thread_f(void *ignored) {
 		if (transferred == sizeof(packet)) {
 			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0], packet.keycode[1]);
 
-			//printf("%s\n", keystate);
+			printf("%s\n", keystate);
 
 			if (packet.keycode[0] == KEY_ESC) { /* ESC pressed? */
 				break;

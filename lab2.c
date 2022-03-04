@@ -49,13 +49,13 @@ char usb_to_ascii(uint8_t mod, uint8_t k1) {
 	if (k1 == 0x00){
 		return ASCII_NULL;
 	}
-
+	int modded = (mod == KEY_MOD_LSHIFT || mod == KEY_MOD_RSHIFT)
 	uint8_t ascii = ASCII_NULL;
 
 	// if the key is among a-z
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
 		ascii = k1 + 93;
-		if (mod == KEY_MOD_LSHIFT || mod == KEY_MOD_RSHIFT) {
+		if (modded) {
 			ascii -= 0x20;
 		}
 	} 
@@ -82,6 +82,10 @@ char usb_to_ascii(uint8_t mod, uint8_t k1) {
 
 	if (KEY_1 <= k1 && k1 <= KEY_9 && mod == 0) {
 		ascii = k1 + 0x13;
+	}
+
+	if (k1 == KEY_1 && modded) {
+		ascii = ASCII_EX;
 	}
 
 	return (char) ascii;

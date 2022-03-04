@@ -278,7 +278,7 @@ void *input_thread_f(void *ignored) {
 			key = usb_to_ascii(packet.keycode[0]);
 
 			if ((key != ASCII_NULL) && valid) {
-				printf("WTF\n");
+				printf("WTF1\n");
 
 				if ((cursor / COLS) == 0) {
 					screen[USER_INPUT_L1][cursor % COLS] = key;
@@ -303,6 +303,7 @@ void *input_thread_f(void *ignored) {
 				refresh();
 			} else {
 				valid = 1;
+				printf("WTF2\n");
 			}
 		}
 	}

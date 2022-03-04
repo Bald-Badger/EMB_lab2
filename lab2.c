@@ -268,6 +268,7 @@ void *input_thread_f(void *ignored) {
 				}
 				cursor = 0;	// reset cursor
 				message_ptr = 0;
+				clear_input_space();
 				refresh();
 			}
 

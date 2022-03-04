@@ -61,19 +61,19 @@ char usb_to_ascii(uint8_t mod, uint8_t k1) {
 	} 
 
 	else if (k1 == KEY_SPACE) {
-		ascii = ASCII_SPACE;
+		return ASCII_SPACE;
 	}
 
 	else if (k1 == KEY_DOT) {
-		ascii = 0x2E;
+		return 0x2E;
 	}
 
 	else if (k1 == KEY_COMMA) {
-		ascii == 0x2C;
+		return 0x2C;
 	}
 
 	else if (k1 == KEY_APOSTROPHE) {
-		ascii == 0x27;
+		return 0x27;
 	}
 
 	return (char) ascii;

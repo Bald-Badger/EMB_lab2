@@ -213,6 +213,7 @@ int main()
 	return 0;
 }
 
+
 void *network_thread_f(void *ignored)
 {
 	char recvBuf[BUFFER_SIZE];
@@ -223,12 +224,15 @@ void *network_thread_f(void *ignored)
 		printf("%s", recvBuf);
 		//fbputs(recvBuf, 8, 0);
 		char* ptr = screen[10];
-		for (int i = 0; i < strlen(recvBuf); i++) {
-			*(ptr + i) = recvBuf[i];
+		int len = strlen(recvBuf);
+		int line = len / COLS + 1;
+		shift_chat(line);
+		for (int i = 0; i < len; i++) {
+			ptr[i] = recvBuf[i];
 		}
 		refresh();
 	}
-	return NULL; 
+	return NULL;
 }
 
 

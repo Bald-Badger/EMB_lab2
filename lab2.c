@@ -43,7 +43,6 @@ void *network_thread_f(void *);
 pthread_t input_thread;
 void *input_thread_f(void *);
 
-int CAPS = 0; // 1 if caps lock is on
 int exit_flag = 0; // 1 then exit
 
 char screen [ROWS][COLS];
@@ -84,6 +83,7 @@ void refresh() {
 	}
 }
 
+
 void clear_screen() {
 	for (int i = 0; i < ROWS; i ++) {
 		for (int j = 0; j < COLS; j++) {
@@ -98,7 +98,6 @@ void print_canvas() {
 	// draw a hoirizonta line
 	for (int col = 0 ; col < COLS ; col++) {
 		screen[SEPREATOR_ROW][col] = ASCII_UNDERSCORE;
-		//fbputchar('=', SEPREATOR_ROW, col);
 	}
 	refresh();
 }
@@ -131,6 +130,12 @@ int main()
 	if ((err = fbopen()) != 0) {
 		fprintf(stderr, "Error: Could not open framebuffer: %d\n", err);
 		exit(1);
+	}
+
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			screen[i][j] = ASCII_SPACE;
+		}
 	}
 
 	fbclear();
@@ -205,11 +210,11 @@ void *input_thread_f(void *ignored) {
 	int cursor = 0;
 	
 
-		/* Look for and handle keypresses */
+	/* Look for and handle keypresses */
 	for (;;) {
 		libusb_interrupt_transfer(keyboard, endpoint_address,
-						(unsigned char *) &packet, sizeof(packet),
-						&transferred, 0);
+			(unsigned char *) &packet, sizeof(packet),
+			&transferred, 0);
 
 		if (transferred == sizeof(packet)) {
 			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0],
@@ -245,8 +250,8 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L1][cursor] = key;
 					screen[USER_INPUT_L1][cursor + 1] = ASCII_UNDERSCORE;
 				} else {
-					//screen[USER_INPUT_L2][cursor -  COLS] = key;
-					//screen[USER_INPUT_L2][cursor + 1 - COLS] = ASCII_UNDERSCORE;
+					screen[USER_INPUT_L2][cursor -  COLS] = key;
+					screen[USER_INPUT_L2][cursor + 1 - COLS] = ASCII_UNDERSCORE;
 				}
 
 				cursor ++;
@@ -269,7 +274,7 @@ void *input_thread_f(void *ignored) {
 					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L2, cursor-COLS);
 				}
 		*/
-			} 
+			}
 		}
 	}
 	return NULL;

@@ -286,7 +286,7 @@ void *input_thread_f(void *ignored) {
 
 				if (cursor >= COLS*2 - 1) {
 					cursor = cursor - COLS;
-					shift_user();
+					//shift_user();
 				}
 
 				cursor ++;

@@ -75,9 +75,26 @@ void sanity_test() {
 	fbputs("Test Text", 4, 10);
 }
 
+
+void refresh() {
+	for (int i = 0; i < ROWS; i++) {
+		fbputs(screen[i], i);
+	}
+}
+
+void clear_screen() {
+	for (int i = 0; i < ROWS; i ++) {
+		for (int j = 0; j < ROWS; j++) {
+			screen[i][j] = " ";
+		}
+	}
+	refresh();
+}
+
 void print_canvas() {
 	// draw a hoirizonta line
 	for (int col = 0 ; col < COLS ; col++) {
+		screen[SEPREATOR_ROW][col] = 
 		fbputchar('=', SEPREATOR_ROW, col);
 	}
 
@@ -209,8 +226,8 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
-				clear_input_space();
-				//scroll_one_row(USER_INPUT_L2, 1);
+				//clear_input_space();
+				clear_screen();
 			}
 
 			// change the input to ascii

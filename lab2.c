@@ -284,8 +284,8 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L2][cursor + 1 - COLS] = ASCII_UNDERSCORE;
 				}
 
-				if (cursor >= COLS*2 - 1) {
-					cursor = cursor - COLS;
+				if (cursor >= (COLS*2 - 1)) {
+					//cursor = cursor - COLS;
 					//shift_user();
 				}
 

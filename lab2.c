@@ -290,10 +290,10 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L2][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
 				}
 
-				if (cursor >= (COLS*2 - 1)) {
+				//if (cursor >= (COLS*2 - 1)) {
 					//cursor = cursor - COLS;
 					//shift_user();
-				}
+				//}
 
 				cursor ++;
 

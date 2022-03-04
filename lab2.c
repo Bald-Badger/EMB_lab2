@@ -143,9 +143,11 @@ int shift_user() {
 }
 
 int shift_chat(int line) {
+	if (line > (SEPREATOR_ROW - 1)) {return -1;}
 	for (int i = line; i < (SEPREATOR_ROW-1); i++) {
 		shift_row(i, line);
 	}
+	refresh();
 }
 
 

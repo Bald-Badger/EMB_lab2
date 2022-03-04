@@ -275,6 +275,12 @@ void *input_thread_f(void *ignored) {
 				refresh();
 			}
 
+			if (packet.keycode[0] == KEY_BACKSPACE) {
+				message[message_ptr] = ASCII_SPACE;
+				cursor --;
+				message_ptr --;
+			}
+
 			// change the input to ascii
 			key = usb_to_ascii(packet.keycode[0]);
 

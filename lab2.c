@@ -279,7 +279,8 @@ void *input_thread_f(void *ignored) {
 				}
 				refresh();
 			}
-			else {
+			else {	// normal input
+
 				// change the input to ascii
 				key = usb_to_ascii(packet.modifiers, packet.keycode[0]);
 
@@ -287,10 +288,10 @@ void *input_thread_f(void *ignored) {
 
 					if ((message_ptr / COLS) == 0) {
 						screen[USER_INPUT_L1][message_ptr % COLS] = key;
-						screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
+						screen[CURSER_L1][message_ptr % COLS] = ASCII_UNDERSCORE;
 					} else {
 						screen[USER_INPUT_L2][message_ptr % COLS] = key;
-						screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
+						screen[CURSER_L2][message_ptr % COLS] = ASCII_UNDERSCORE;
 					}
 
 					if (message_ptr >= (COLS*2 - 1)) {

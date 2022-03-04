@@ -19,8 +19,10 @@
 #define COLS 64
 
 #define SEPREATOR_ROW 19
-#define USER_INPUT_L1 22
-#define USER_INPUT_L2 23
+#define USER_INPUT_L1 20
+#define CURSER_L1 21
+#define USER_INPUT_L2 22
+#define CURSER_L2 23
 
 extern int fbopen(void);
 extern void fbputchar(char, int, int);

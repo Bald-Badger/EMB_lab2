@@ -224,7 +224,7 @@ void *network_thread_f(void *ignored)
 		//fbputs(recvBuf, 8, 0);
 		char* ptr = screen[10];
 		for (int i = 0; i < strlen(recvBuf); i++) {
-			*(char+i) = recvBuf[i];
+			*(ptr + i) = recvBuf[i];
 		}
 	}
 	refresh();

@@ -250,6 +250,7 @@ void *input_thread_f(void *ignored) {
 	char keystate[12];
 	char key;
 	int cursor = 0;
+	int valid = 1;
 
 	/* Look for and handle keypresses */
 	for (;;) {
@@ -372,8 +373,12 @@ void *input_thread_f(void *ignored) {
 					message_ptr ++;
 					
 					cursor ++;
+					
+					valid = 0;
 
 					refresh();
+				} else {
+					valid = 1;
 				}
 			}
 		}

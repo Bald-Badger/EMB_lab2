@@ -131,7 +131,7 @@ int shift_row (int row, int line) {
 
 
 void shift_user() {
-	for (int i = (SEPREATOR_ROW + 2); i < ROWS; i++) {
+	for (int i = (SEPREATOR_ROW + 3); i < ROWS; i++) {
 		shift_row(i, 2);
 	}
 }

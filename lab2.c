@@ -332,12 +332,14 @@ void *input_thread_f(void *ignored) {
 				if ((key != ASCII_NULL) && valid) {
 
 					if ((message_ptr / COLS) == 0) {
+						memmove(&screen[USER_INPUT_L1+1], &screen[USER_INPUT_L1], BUFFER_SIZE);
 						screen[USER_INPUT_L1][cursor % COLS] = key;
 						screen[CURSER_L1][cursor % COLS] = ASCII_UNDERSCORE;
 						if (message_ptr % COLS > 0) {
 							screen[CURSER_L1][cursor % COLS - 1] = ASCII_SPACE;
 						}
 					} else {
+						memmove(&screen[USER_INPUT_L1+1], &screen[USER_INPUT_L1], BUFFER_SIZE);
 						screen[USER_INPUT_L2][cursor % COLS] = key;
 						screen[CURSER_L2][cursor % COLS] = ASCII_UNDERSCORE;
 						if (message_ptr % COLS > 0) {

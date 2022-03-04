@@ -293,13 +293,14 @@ void *input_thread_f(void *ignored) {
 
 			else if (packet.keycode[0] == KEY_RIGHT) {
 				if (cursor < message_ptr) {
-					if (message_ptr % COLS == 0) {
-						if (message_ptr / COLS != 0) {
+					if (message_ptr / COLS == 0) {
+						if (message_ptr % COLS != 0) {
 							screen[CURSER_L1][message_ptr % COLS + 1] = ASCII_UNDERSCORE;
 						}
 						screen[CURSER_L1][message_ptr % COLS] = ASCII_SPACE;
-					} else {
-						if (message_ptr / COLS != 0) {
+					} 
+					else {
+						if (message_ptr % COLS != 0) {
 							screen[CURSER_L2][message_ptr % COLS + 1] = ASCII_UNDERSCORE;
 						}
 						screen[CURSER_L2][message_ptr % COLS] = ASCII_SPACE;
@@ -311,7 +312,7 @@ void *input_thread_f(void *ignored) {
 
 			else if (packet.keycode[0] == KEY_LEFT) {
 				if (cursor > 0) {
-					if (message_ptr % COLS == 0) {
+					if (message_ptr / COLS == 0) {
 						screen[CURSER_L1][message_ptr % COLS - 1] = ASCII_UNDERSCORE;
 						screen[CURSER_L1][message_ptr % COLS] = ASCII_SPACE;
 					} else {

@@ -78,7 +78,9 @@ void sanity_test() {
 
 void refresh() {
 	for (int i = 0; i < ROWS; i++) {
-		fbputs(screen[i], i, 0);
+		for (int j = 0; j < COLS; j++) {
+			fbputchar(screen[i][j], i, j);
+		}
 	}
 }
 
@@ -227,7 +229,6 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
-				//clear_input_space();
 				clear_screen();
 			}
 
@@ -244,8 +245,8 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L1][cursor] = key;
 					screen[USER_INPUT_L1][cursor + 1] = ASCII_UNDERSCORE;
 				} else {
-					//screen[USER_INPUT_L2][cursor] = key;
-					//screen[USER_INPUT_L2][cursor + 1] = ASCII_UNDERSCORE;
+					//screen[USER_INPUT_L2][cursor -  COLS] = key;
+					//screen[USER_INPUT_L2][cursor + 1 - COLS] = ASCII_UNDERSCORE;
 				}
 
 				cursor ++;

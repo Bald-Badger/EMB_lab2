@@ -136,10 +136,16 @@ int shift_row (int row, int line) {
 }
 
 int shift_user() {
-	for (int i = SEPREATOR_ROW + 1; i < ROWS; i++) {
+	for (int i = (SEPREATOR_ROW + 1); i < ROWS; i++) {
 		shift_row(i, 1);
 	}
 	refresh();
+}
+
+int shift_chat(int line) {
+	for (int i = line; i < (SEPREATOR_ROW-1); i++) {
+		shift_row(i, line);
+	}
 }
 
 

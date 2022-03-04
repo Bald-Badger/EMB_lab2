@@ -43,7 +43,8 @@ void *network_thread_f(void *);
 pthread_t input_thread;
 void *input_thread_f(void *);
 
-int exit_flag = 0; // 1 then exit
+char message[MAX_MSG_LEN];
+int message_ptr = 0;
 
 char screen [ROWS][COLS];
 
@@ -204,10 +205,8 @@ void *input_thread_f(void *ignored) {
 	int transferred;
 	char keystate[12];
 	char key;
-	char message[MAX_MSG_LEN];
-	char message_l1[COLS];
-	char message_l2[COLS];
 	int cursor = 0;
+	
 	
 
 	/* Look for and handle keypresses */
@@ -234,6 +233,8 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
+				message_ptr = 0;
+				message[0] = "\0";
 				clear_screen();
 			}
 
@@ -241,7 +242,7 @@ void *input_thread_f(void *ignored) {
 			key = usb_to_ascii(packet.keycode[0]);
 
 			if (key != ASCII_NULL) {
-				if (cursor >= MAX_MSG_LEN-1) {
+				if (message_ptr >= MAX_MSG_LEN-1) {
 					printf("max message len reached!\n");
 					continue;
 				}
@@ -256,24 +257,10 @@ void *input_thread_f(void *ignored) {
 
 				cursor ++;
 
-				refresh();
-/*
-				message[cursor] = key;
-				cursor ++;
-				if (cursor < COLS) {
-					memcpy(message_l1, &message[0], COLS * sizeof(*message));
-					fbputs(message_l1, USER_INPUT_L1, 0);
-				} else {
-					memcpy(message_l2, &message[COLS-1], COLS * sizeof(*message));
-					fbputs(message_l2, USER_INPUT_L2, 0);
-				}
+				message[message_ptr] = key;
+				message_ptr ++;
 
-				if (cursor <= COLS) {
-					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L1, cursor);
-				} else {
-					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L2, cursor-COLS);
-				}
-		*/
+				refresh();
 			}
 		}
 	}

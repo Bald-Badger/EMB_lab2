@@ -346,7 +346,7 @@ void *input_thread_f(void *ignored) {
 				}
 				
 
-				if (key != ASCII_NULL) {
+				if ((key != ASCII_NULL) && valid) {
 					if (cursor < message_ptr) {
 						memmove(&message[cursor+1], &message[cursor], BUFFER_SIZE);
 					}

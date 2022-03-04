@@ -226,8 +226,8 @@ void *network_thread_f(void *ignored)
 		for (int i = 0; i < strlen(recvBuf); i++) {
 			*(ptr + i) = recvBuf[i];
 		}
+		refresh();
 	}
-	refresh();
 	return NULL;
 }
 

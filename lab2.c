@@ -267,9 +267,13 @@ void *input_thread_f(void *ignored) {
 			}
 
 			if (packet.keycode[0] == KEY_BACKSPACE) {
-				screen[message_ptr+1] = ASCII_NULL;
-				screen[message_ptr+2] = ASCII_NULL;
-				screen[message_ptr] = ASCII_UNDERSCORE;
+				if ((message_ptr / COLS) == 0) {
+					screen[USER_INPUT_L1][message_ptr % COLS] = ASCII_UNDERSCORE;
+					screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_NULL;
+				} else {
+					screen[USER_INPUT_L2][message_ptr % COLS] = ASCII_UNDERSCORE;
+					screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_NULL;
+				}
 				message_ptr -= 1;
 				refresh();
 			}

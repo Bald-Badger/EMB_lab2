@@ -85,16 +85,17 @@ void refresh() {
 void clear_screen() {
 	for (int i = 0; i < ROWS; i ++) {
 		for (int j = 0; j < ROWS; j++) {
-			screen[i][j] = " ";
+			screen[i][j] = ASCII_SPACE;
 		}
 	}
 	refresh();
 }
 
+
 void print_canvas() {
 	// draw a hoirizonta line
 	for (int col = 0 ; col < COLS ; col++) {
-		screen[SEPREATOR_ROW][col] = "="
+		screen[SEPREATOR_ROW][col] = "=";
 		//fbputchar('=', SEPREATOR_ROW, col);
 	}
 	refresh();

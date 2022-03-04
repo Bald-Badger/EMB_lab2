@@ -266,7 +266,7 @@ void *input_thread_f(void *ignored) {
 				refresh();
 			}
 
-			if (packet.keycode[0] == KEY_BACKSPACE) {
+			else if (packet.keycode[0] == KEY_BACKSPACE) {
 				if ((message_ptr / COLS) == 0) {
 					screen[USER_INPUT_L1][message_ptr % COLS] = ASCII_UNDERSCORE;
 					screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_SPACE;
@@ -274,36 +274,37 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L2][message_ptr % COLS] = ASCII_UNDERSCORE;
 					screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_SPACE;
 				}
-				message_ptr -= 1;
+				message_ptr = message_ptr - 1;
 				refresh();
 			}
+			else {
+				// change the input to ascii
+				key = usb_to_ascii(packet.keycode[0]);
 
-			// change the input to ascii
-			key = usb_to_ascii(packet.keycode[0]);
+				if ((key != ASCII_NULL) && valid) {
 
-			if ((key != ASCII_NULL) && valid) {;
+					if ((message_ptr / COLS) == 0) {
+						screen[USER_INPUT_L1][message_ptr % COLS] = key;
+						screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
+					} else {
+						screen[USER_INPUT_L2][message_ptr % COLS] = key;
+						screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
+					}
 
-				if ((message_ptr / COLS) == 0) {
-					screen[USER_INPUT_L1][message_ptr % COLS] = key;
-					screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
+					if (message_ptr >= (COLS*2 - 1)) {
+						message_ptr = message_ptr - COLS;
+						shift_user();
+					}
+
+					message[message_ptr] = key;
+					message_ptr ++;
+					
+					valid = 0;
+
+					refresh();
 				} else {
-					screen[USER_INPUT_L2][message_ptr % COLS] = key;
-					screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
+					valid = 1;
 				}
-
-				if (message_ptr >= (COLS*2 - 1)) {
-					message_ptr = message_ptr - COLS;
-					shift_user();
-				}
-
-				message[message_ptr] = key;
-				message_ptr ++;
-				
-				valid = 0;
-
-				refresh();
-			} else {
-				valid = 1;
 			}
 		}
 	}

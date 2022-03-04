@@ -330,7 +330,9 @@ void *input_thread_f(void *ignored) {
 				key = usb_to_ascii(packet.modifiers, packet.keycode[0]);
 
 				if ((key != ASCII_NULL) && valid) {
-					memmove(&message[cursor+1], &message[cursor], BUFFER_SIZE);
+					if (cursor < message_ptr) {
+						memmove(&message[cursor+1], &message[cursor], BUFFER_SIZE);
+					}
 					if ((message_ptr / COLS) == 0) {
 						screen[USER_INPUT_L1][cursor % COLS] = key;
 						screen[CURSER_L1][cursor % COLS] = ASCII_UNDERSCORE;

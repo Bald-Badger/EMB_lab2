@@ -244,8 +244,8 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L1][cursor] = key;
 					screen[USER_INPUT_L1][cursor + 1] = ASCII_UNDERSCORE;
 				} else {
-					screen[USER_INPUT_L2][cursor] = key;
-					screen[USER_INPUT_L2][cursor + 1] = ASCII_UNDERSCORE;
+					//screen[USER_INPUT_L2][cursor] = key;
+					//screen[USER_INPUT_L2][cursor + 1] = ASCII_UNDERSCORE;
 				}
 
 				cursor ++;

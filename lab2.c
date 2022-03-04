@@ -374,7 +374,7 @@ void *input_thread_f(void *ignored) {
 					
 					cursor ++;
 					
-					valid = 0;
+					//valid = 0;
 
 					refresh();
 				} else {

@@ -333,7 +333,6 @@ void *input_thread_f(void *ignored) {
 					
 					//if (cursor < message_ptr) {
 						memmove(&message[cursor+1], &message[cursor], BUFFER_SIZE);
-						memmove(&screen[USER_INPUT_L1][cursor+1], &screen[USER_INPUT_L1][cursor], BUFFER_SIZE);
 					//}
 
 					if ((message_ptr / COLS) == 0) {

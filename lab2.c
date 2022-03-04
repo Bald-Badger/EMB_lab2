@@ -223,7 +223,7 @@ void *network_thread_f(void *ignored)
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
 		//fbputs(recvBuf, 8, 0);
-		char* ptr = screen[10];
+		char* ptr = screen[19];
 		int len = strlen(recvBuf);
 		int line = len / COLS + 1;
 		shift_chat(line);
@@ -268,8 +268,7 @@ void *input_thread_f(void *ignored) {
 				}
 				cursor = 0;	// reset cursor
 				message_ptr = 0;
-				message[0] = "\0";
-				//shift_user();
+				refresh();
 			}
 
 			// change the input to ascii

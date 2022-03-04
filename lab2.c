@@ -274,7 +274,9 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L2][message_ptr % COLS] = ASCII_UNDERSCORE;
 					screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_SPACE;
 				}
-				message_ptr = message_ptr - 1;
+				if (message_ptr >0) {
+					message_ptr --;
+				}
 				refresh();
 			}
 			else {

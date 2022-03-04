@@ -257,28 +257,25 @@ void *input_thread_f(void *ignored) {
 
 			printf("%s\n", keystate);
 
-			// fbputs(keystate, 6, 0); // write the key hex to the frame buffer
-
 			if (packet.keycode[0] == KEY_ESC) { /* ESC pressed? */
 				break;
 			}
 
 			if (packet.keycode[0] == KEY_ENTER) {
-				// should send message, clear message for now
+				write(sockfd, message, strlen(message));
 				for (int i = 0; i < strlen(message); i++) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
 				message_ptr = 0;
 				message[0] = "\0";
-				shift_user();
+				//shift_user();
 			}
 
 			// change the input to ascii
 			key = usb_to_ascii(packet.keycode[0]);
 
-			if ((key != ASCII_NULL) && valid) {
-				printf("WTF1\n");
+			if ((key != ASCII_NULL) && valid) {;
 
 				if ((cursor / COLS) == 0) {
 					screen[USER_INPUT_L1][cursor % COLS] = key;
@@ -303,7 +300,6 @@ void *input_thread_f(void *ignored) {
 				refresh();
 			} else {
 				valid = 1;
-				printf("WTF2\n");
 			}
 		}
 	}

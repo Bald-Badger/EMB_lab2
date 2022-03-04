@@ -49,7 +49,7 @@ char usb_to_ascii(uint8_t mod, uint8_t k1) {
 	if (k1 == 0x00){
 		return ASCII_NULL;
 	}
-	int modded = (mod == KEY_MOD_LSHIFT || mod == KEY_MOD_RSHIFT)
+	int modded = (mod == KEY_MOD_LSHIFT || mod == KEY_MOD_RSHIFT);
 	uint8_t ascii = ASCII_NULL;
 
 	// if the key is among a-z

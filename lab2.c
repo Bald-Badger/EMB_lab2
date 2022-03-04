@@ -131,7 +131,7 @@ int shift_row (int row, int line) {
 
 
 void shift_user() {
-	for (int i = (SEPREATOR_ROW + 1); i < ROWS; i++) {
+	for (int i = (SEPREATOR_ROW + 2); i < ROWS; i++) {
 		shift_row(i, 1);
 	}
 }
@@ -219,7 +219,7 @@ void *network_thread_f(void *ignored)
 	while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
-		char* ptr = screen[SEPREATOR_ROW - 2];
+		char* ptr = screen[SEPREATOR_ROW - 3];
 		int len = strlen(recvBuf);
 		int line = len / COLS + 1;
 		shift_chat(line);

@@ -18,7 +18,7 @@
 #define ROWS 24
 #define COLS 64
 
-#define SEPREATOR_ROW 19
+#define SEPREATOR_ROW 18
 #define USER_INPUT_L1 20
 #define CURSER_L1 21
 #define USER_INPUT_L2 22

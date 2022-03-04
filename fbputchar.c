@@ -64,9 +64,12 @@ void fbputchar(char c, int row, int col)
 	int x, y;
 	unsigned char pixels, *pixelp = font + FONT_HEIGHT * c;
 	unsigned char mask;
+	/*
 	unsigned char *pixel, *left = framebuffer +
 		(row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length +
 		(col * FONT_WIDTH * 2 + fb_vinfo.xoffset) * BITS_PER_PIXEL / 8;
+*/
+	unsigned char *pixel, *left = get_pixel_index(row, col);
 
 	for (y = 0 ; y < FONT_HEIGHT * 2 ; y++, left += fb_finfo.line_length) {
 		pixels = *pixelp;

@@ -228,7 +228,7 @@ void *network_thread_f(void *ignored)
 		}
 		refresh();
 	}
-	return NULL;
+	return NULL; 
 }
 
 

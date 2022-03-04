@@ -18,7 +18,6 @@
 #define ROWS 24
 #define COLS 64
 
-#define MAX_MSG_LEN COLS * 8
 #define SEPREATOR_ROW 19
 #define USER_INPUT_L1 22
 #define USER_INPUT_L2 23

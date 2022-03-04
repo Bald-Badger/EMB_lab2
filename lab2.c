@@ -277,10 +277,6 @@ void *input_thread_f(void *ignored) {
 			key = usb_to_ascii(packet.keycode[0]);
 
 			if (key != ASCII_NULL) {
-				if (message_ptr >= MAX_MSG_LEN-1) {
-					printf("max message len reached!\n");
-					continue;
-				}
 
 				if ((cursor / COLS) == 0) {
 					screen[USER_INPUT_L1][cursor % COLS] = key;
@@ -290,10 +286,10 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L2][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
 				}
 
-				//if (cursor >= (COLS*2 - 1)) {
-					//cursor = cursor - COLS;
-					//shift_user();
-				//}
+				if (cursor >= (COLS*2 - 1)) {
+					cursor = cursor - COLS;
+					shift_user();
+				}
 
 				cursor ++;
 

@@ -248,6 +248,8 @@ void *input_thread_f(void *ignored) {
 					screen[USER_INPUT_L2][cursor + 1] = ASCII_UNDERSCORE;
 				}
 
+				cursor ++;
+
 				refresh();
 /*
 				message[cursor] = key;

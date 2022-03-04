@@ -122,6 +122,27 @@ void clear_input_space() {
 }
 
 
+int shift_row (int row, int line) {
+	if (row < line) {
+		printf("error in shift_row \n");
+		return -1;
+	}
+
+	for (int i = 0; i < COLS; i++) {
+		screen[row - line][i] = screen[row][i];
+		screen[row][i] = ASCII_SPACE;
+	}
+	return 0;
+}
+
+int shift_user() {
+	for (int i = SEPREATOR_ROW + 1; i < ROWS; i++) {
+		shift_row(i, 1);
+	}
+	refresh();
+}
+
+
 int main()
 {
 	int err;
@@ -221,7 +242,7 @@ void *input_thread_f(void *ignored) {
 
 			printf("%s\n", keystate);
 
-			fbputs(keystate, 6, 0); // write the key hex to the frame buffer
+			// fbputs(keystate, 6, 0); // write the key hex to the frame buffer
 
 			if (packet.keycode[0] == KEY_ESC) { /* ESC pressed? */
 				break;
@@ -235,7 +256,8 @@ void *input_thread_f(void *ignored) {
 				cursor = 0;	// reset cursor
 				message_ptr = 0;
 				message[0] = "\0";
-				clear_screen();
+				//clear_screen();
+				shift_user();
 			}
 
 			// change the input to ascii
@@ -253,6 +275,10 @@ void *input_thread_f(void *ignored) {
 				} else {
 					screen[USER_INPUT_L2][cursor -  COLS] = key;
 					screen[USER_INPUT_L2][cursor + 1 - COLS] = ASCII_UNDERSCORE;
+				}
+
+				if (cursor >= COLS*2 - 1) {
+					cursor = cursor - COLS;
 				}
 
 				cursor ++;

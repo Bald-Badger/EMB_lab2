@@ -221,9 +221,13 @@ void *network_thread_f(void *ignored)
 	while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
-		fbputs(recvBuf, 8, 0);
+		//fbputs(recvBuf, 8, 0);
+		char* ptr = screen[10];
+		for (i = 0; i < strlen(recvBuf); i++) {
+			*(char+i) = recvBuf[i];
+		}
 	}
-
+	refresh();
 	return NULL;
 }
 
@@ -234,7 +238,6 @@ void *input_thread_f(void *ignored) {
 	char keystate[12];
 	char key;
 	int cursor = 0;
-	
 	
 
 	/* Look for and handle keypresses */
@@ -286,8 +289,7 @@ void *input_thread_f(void *ignored) {
 
 				if (cursor >= (COLS*2 - 1)) {
 					//cursor = cursor - COLS;
-					cursor --;
-					shift_user();
+					//shift_user();
 				}
 
 				cursor ++;

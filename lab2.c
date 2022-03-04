@@ -330,16 +330,14 @@ void *input_thread_f(void *ignored) {
 				key = usb_to_ascii(packet.modifiers, packet.keycode[0]);
 
 				if ((key != ASCII_NULL) && valid) {
-
+					memmove(&message[cursor+1], &message[cursor], BUFFER_SIZE);
 					if ((message_ptr / COLS) == 0) {
-						memmove(&screen[USER_INPUT_L1+1], &screen[USER_INPUT_L1], BUFFER_SIZE);
 						screen[USER_INPUT_L1][cursor % COLS] = key;
 						screen[CURSER_L1][cursor % COLS] = ASCII_UNDERSCORE;
 						if (message_ptr % COLS > 0) {
 							screen[CURSER_L1][cursor % COLS - 1] = ASCII_SPACE;
 						}
 					} else {
-						memmove(&screen[USER_INPUT_L1+1], &screen[USER_INPUT_L1], BUFFER_SIZE);
 						screen[USER_INPUT_L2][cursor % COLS] = key;
 						screen[CURSER_L2][cursor % COLS] = ASCII_UNDERSCORE;
 						if (message_ptr % COLS > 0) {

@@ -137,7 +137,7 @@ int shift_row (int row, int line) {
 	return 0;
 }
 
-int shift_user() {
+void shift_user() {
 	for (int i = (SEPREATOR_ROW + 1); i < ROWS; i++) {
 		shift_row(i, 1);
 	}
@@ -149,6 +149,7 @@ int shift_chat(int line) {
 		shift_row(i, line);
 	}
 	refresh();
+	return 0;
 }
 
 

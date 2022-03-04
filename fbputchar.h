@@ -20,7 +20,7 @@
 
 #define MAX_MSG_LEN COLS * 8
 #define SEPREATOR_ROW 20
-#define USER_INPUT_L1 21
+#define USER_INPUT_L1 22
 #define USER_INPUT_L2 23
 
 extern int fbopen(void);

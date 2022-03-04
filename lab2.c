@@ -225,7 +225,6 @@ void *network_thread_f(void *ignored)
 	while ( (n = read(sockfd, &recvBuf, BUFFER_SIZE - 1)) > 0 ) {
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
-		//fbputs(recvBuf, 8, 0);
 		char* ptr = screen[SEPREATOR_ROW - 2];
 		int len = strlen(recvBuf);
 		int line = len / COLS + 1;
@@ -246,7 +245,6 @@ void *input_thread_f(void *ignored) {
 	char key;
 	int cursor = 0;
 	int valid = 1;
-	
 
 	/* Look for and handle keypresses */
 	for (;;) {
@@ -266,7 +264,7 @@ void *input_thread_f(void *ignored) {
 
 			if (packet.keycode[0] == KEY_ENTER) {
 				write(sockfd, message, strlen(message));
-				for (int i = 0; i < strlen(message); i++) {
+				for (int i = 0; i < sizeof message; i++) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor

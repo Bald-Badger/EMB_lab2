@@ -195,7 +195,7 @@ void *input_thread_f(void *ignored) {
 			sprintf(keystate, "%02x %02x %02x", packet.modifiers, packet.keycode[0],
 				packet.keycode[1]);
 
-			//printf("%s\n", keystate);
+			printf("%s\n", keystate);
 
 			fbputs(keystate, 6, 0); // write the key hex to the frame buffer
 
@@ -209,8 +209,8 @@ void *input_thread_f(void *ignored) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor
-				//clear_input_space();
-				scroll_one_row(USER_INPUT_L2, 1);
+				clear_input_space();
+				//scroll_one_row(USER_INPUT_L2, 1);
 			}
 
 			// change the input to ascii

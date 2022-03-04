@@ -270,7 +270,6 @@ void *input_thread_f(void *ignored) {
 				cursor = 0;	// reset cursor
 				message_ptr = 0;
 				message[0] = "\0";
-				//clear_screen();
 				shift_user();
 			}
 
@@ -284,11 +283,11 @@ void *input_thread_f(void *ignored) {
 				}
 
 				if (cursor < (COLS - 1)) {
-					screen[USER_INPUT_L1][cursor] = key;
-					screen[USER_INPUT_L1][cursor + 1] = ASCII_UNDERSCORE;
+					screen[USER_INPUT_L1][cursor % COLS] = key;
+					screen[USER_INPUT_L1][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
 				} else {
-					screen[USER_INPUT_L2][cursor -  COLS] = key;
-					screen[USER_INPUT_L2][cursor + 1 - COLS] = ASCII_UNDERSCORE;
+					screen[USER_INPUT_L2][cursor % COLS] = key;
+					screen[USER_INPUT_L2][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
 				}
 
 				if (cursor >= (COLS*2 - 1)) {

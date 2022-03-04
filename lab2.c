@@ -282,7 +282,7 @@ void *input_thread_f(void *ignored) {
 					continue;
 				}
 
-				if ((cursor / COLS) == 1) {
+				if ((cursor / COLS) == 0) {
 					screen[USER_INPUT_L1][cursor % COLS] = key;
 					screen[USER_INPUT_L1][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
 				} else {

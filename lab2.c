@@ -48,7 +48,7 @@ int message_ptr = 0;
 
 char screen [ROWS][COLS];
 
-char usb_to_ascii(uint8_t k1) {
+char usb_to_ascii(uint8_t mod, uint8_t k1) {
 	if (k1 == 0x00){
 		return ASCII_NULL;
 	}
@@ -58,6 +58,9 @@ char usb_to_ascii(uint8_t k1) {
 	// if the key is among a-z
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
 		ascii = k1 + 93;
+		if (mod == KEY_LEFTSHIFT || mod == KEY_RIGHTSHIFT) {
+			ascii -= 0x20;
+		}
 	} 
 
 	else if (k1 == KEY_SPACE) {
@@ -281,7 +284,7 @@ void *input_thread_f(void *ignored) {
 			}
 			else {
 				// change the input to ascii
-				key = usb_to_ascii(packet.keycode[0]);
+				key = usb_to_ascii(packet.modifiers, packet.keycode[0]);
 
 				if ((key != ASCII_NULL) && valid) {
 

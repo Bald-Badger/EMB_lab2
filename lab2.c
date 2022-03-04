@@ -347,9 +347,9 @@ void *input_thread_f(void *ignored) {
 						}
 					}
 
-					if (message_ptr >= (COLS*2 - 1)) {
-						//message_ptr = message_ptr - COLS;
-						//shift_user();
+					if (cursor >= (COLS*2 - 1)) {
+						message_ptr = cursor - COLS;
+						shift_user();
 					}
 
 					message[message_ptr] = key;

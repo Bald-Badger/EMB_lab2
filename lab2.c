@@ -84,7 +84,7 @@ void refresh() {
 
 void clear_screen() {
 	for (int i = 0; i < ROWS; i ++) {
-		for (int j = 0; j < ROWS; j++) {
+		for (int j = 0; j < COLS; j++) {
 			screen[i][j] = ASCII_SPACE;
 		}
 	}
@@ -239,6 +239,17 @@ void *input_thread_f(void *ignored) {
 					printf("max message len reached!\n");
 					continue;
 				}
+
+				if (cursor < (COLS - 1)) {
+					screen[USER_INPUT_L1][cursor] = key;
+					screen[USER_INPUT_L1][cursor + 1] = ASCII_UNDERSCORE;
+				} else {
+					screen[USER_INPUT_L2][cursor] = key;
+					screen[USER_INPUT_L2][cursor + 1] = ASCII_UNDERSCORE;
+				}
+
+				refresh();
+/*
 				message[cursor] = key;
 				cursor ++;
 				if (cursor < COLS) {
@@ -254,6 +265,7 @@ void *input_thread_f(void *ignored) {
 				} else {
 					fbputchar(ASCII_UNDERSCORE, USER_INPUT_L2, cursor-COLS);
 				}
+		*/
 			} 
 		}
 	}

@@ -43,7 +43,7 @@ void *network_thread_f(void *);
 pthread_t input_thread;
 void *input_thread_f(void *);
 
-char message[MAX_MSG_LEN];
+char message[1024];
 int message_ptr = 0;
 
 char screen [ROWS][COLS];

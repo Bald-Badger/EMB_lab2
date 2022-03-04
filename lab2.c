@@ -223,7 +223,7 @@ void *network_thread_f(void *ignored)
 		printf("%s", recvBuf);
 		//fbputs(recvBuf, 8, 0);
 		char* ptr = screen[10];
-		for (i = 0; i < strlen(recvBuf); i++) {
+		for (int i = 0; i < strlen(recvBuf); i++) {
 			*(char+i) = recvBuf[i];
 		}
 	}

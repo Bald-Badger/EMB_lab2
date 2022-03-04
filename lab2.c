@@ -208,7 +208,7 @@ void *input_thread_f(void *ignored) {
 				}
 				cursor = 0;	// reset cursor
 				//clear_input_space();
-				scroll_input_space(1);
+				scroll_one_row(USER_INPUT_L2, 1);
 			}
 
 			// change the input to ascii

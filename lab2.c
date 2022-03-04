@@ -255,7 +255,7 @@ void *input_thread_f(void *ignored) {
 				break;
 			}
 
-			if (packet.keycode[0] == KEY_ENTER) {
+			else if (packet.keycode[0] == KEY_ENTER) {
 				write(sockfd, message, strlen(message));
 				for (int i = 0; i < sizeof message; i++) {
 					message[i] = ASCII_NULL;
@@ -306,6 +306,7 @@ void *input_thread_f(void *ignored) {
 					}
 					cursor ++;
 				}
+				refresh();
 			}
 
 			else if (packet.keycode[0] == KEY_LEFT) {
@@ -319,6 +320,7 @@ void *input_thread_f(void *ignored) {
 					}
 					cursor --;
 				}
+				refresh();
 			}
 
 			else {	// normal input

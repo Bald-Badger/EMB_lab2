@@ -131,13 +131,13 @@ void fbclear() {
 
 // (row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length +
 void scroll_one_row (int row, int line) {
-	if (line > row) {return}
+	if (line > row) {return NULL}
 	int row_offset = (line * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length;
 	unsigned char *source = get_pixel_index(row, 0);
 	unsigned char *dest = get_pixel_index(row-line, 0);
 	for (int y = 0 ; y < FONT_HEIGHT * 2 ; y++) {
 		int offset = y * row_offset;
-		memmove(dest + y, source + y, row_offset);
+		memmove(dest + offset, source + offset, row_offset);
 	}
 }
 

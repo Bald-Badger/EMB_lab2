@@ -264,7 +264,7 @@ void *input_thread_f(void *ignored) {
 
 			if (packet.keycode[0] == KEY_ENTER) {
 				// should send message, clear message for now
-				for (int i = 0; i < MAX_MSG_LEN; i++) {
+				for (int i = 0; i < strlen(message); i++) {
 					message[i] = ASCII_NULL;
 				}
 				cursor = 0;	// reset cursor

@@ -107,7 +107,7 @@ void print_canvas() {
 void clear_chat_space() {
 	for (int row = 0; row < SEPREATOR_ROW; row ++) {
 		for (int col = 0; col < COLS; col++) {
-			screen[row, col] = ASCII_SPACE;
+			screen[row][col] = ASCII_SPACE;
 		}
 	}
 	refresh();
@@ -117,7 +117,7 @@ void clear_chat_space() {
 void clear_input_space() {
 	for (int row = SEPREATOR_ROW + 1; row < ROWS; row ++) {
 		for (int col = 0; col < COLS; col++) {
-			screen[row, col] = ASCII_SPACE;
+			screen[row][col] = ASCII_SPACE;
 		}
 	}
 	refresh();

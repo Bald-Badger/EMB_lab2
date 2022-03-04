@@ -237,7 +237,7 @@ void *input_thread_f(void *ignored) {
 	int transferred;
 	char keystate[12];
 	char key;
-	int cursor = 0;
+	//int cursor = 0;
 	int valid = 1;
 
 	/* Look for and handle keypresses */
@@ -260,7 +260,7 @@ void *input_thread_f(void *ignored) {
 				for (int i = 0; i < sizeof message; i++) {
 					message[i] = ASCII_NULL;
 				}
-				cursor = 0;	// reset cursor
+				//cursor = 0;	// reset cursor
 				message_ptr = 0;
 				clear_input_space();
 				refresh();
@@ -270,7 +270,7 @@ void *input_thread_f(void *ignored) {
 				message[message_ptr+1] = ASCII_NULL;
 				message[message_ptr+2] = ASCII_NULL;
 				message[message_ptr] = ASCII_UNDERSCORE;
-				cursor -= 1;
+				//cursor -= 1;
 				message_ptr -= 1;
 				refresh();
 			}
@@ -280,20 +280,18 @@ void *input_thread_f(void *ignored) {
 
 			if ((key != ASCII_NULL) && valid) {;
 
-				if ((cursor / COLS) == 0) {
-					screen[USER_INPUT_L1][cursor % COLS] = key;
-					screen[USER_INPUT_L1][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
+				if ((message_ptr / COLS) == 0) {
+					screen[USER_INPUT_L1][message_ptr % COLS] = key;
+					screen[USER_INPUT_L1][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
 				} else {
-					screen[USER_INPUT_L2][cursor % COLS] = key;
-					screen[USER_INPUT_L2][(cursor % COLS) + 1] = ASCII_UNDERSCORE;
+					screen[USER_INPUT_L2][message_ptr % COLS] = key;
+					screen[USER_INPUT_L2][(message_ptr % COLS) + 1] = ASCII_UNDERSCORE;
 				}
 
-				if (cursor >= (COLS*2 - 1)) {
-					cursor = cursor - COLS;
+				if (message_ptr >= (COLS*2 - 1)) {
+					message_ptr = message_ptr - COLS;
 					shift_user();
 				}
-
-				cursor ++;
 
 				message[message_ptr] = key;
 				message_ptr ++;

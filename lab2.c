@@ -339,7 +339,12 @@ void *input_thread_f(void *ignored) {
 			else {	// normal input
 
 				// change the input to ascii
-				key = usb_to_ascii(packet.modifiers, packet.keycode[0]);
+				if (packet.keycode[1] > 0) {
+					key = usb_to_ascii(packet.modifiers, packet.keycode[1]);
+				} else {
+					key = usb_to_ascii(packet.modifiers, packet.keycode[0]);
+				}
+				
 
 				if ((key != ASCII_NULL) && valid) {
 					if (cursor < message_ptr) {

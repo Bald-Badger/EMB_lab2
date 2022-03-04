@@ -242,6 +242,7 @@ void *input_thread_f(void *ignored) {
 	char keystate[12];
 	char key;
 	int cursor = 0;
+	int valid = 1;
 	
 
 	/* Look for and handle keypresses */
@@ -276,7 +277,7 @@ void *input_thread_f(void *ignored) {
 			// change the input to ascii
 			key = usb_to_ascii(packet.keycode[0]);
 
-			if (key != ASCII_NULL) {
+			if ((key != ASCII_NULL) && valid) {
 
 				if ((cursor / COLS) == 0) {
 					screen[USER_INPUT_L1][cursor % COLS] = key;
@@ -295,8 +296,12 @@ void *input_thread_f(void *ignored) {
 
 				message[message_ptr] = key;
 				message_ptr ++;
+				
+				valid = 0;
 
 				refresh();
+			} else {
+				valid = 1;
 			}
 		}
 	}

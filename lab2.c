@@ -276,7 +276,7 @@ void *input_thread_f(void *ignored) {
 			}
 
 			if (packet.keycode[0] == KEY_BACKSPACE) {
-				message[message_ptr] = ASCII_SPACE;
+				message[message_ptr] = ASCII_NULL;
 				cursor --;
 				message_ptr --;
 				refresh();

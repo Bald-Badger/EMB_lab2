@@ -14,9 +14,6 @@
 #include "usbkeyboard.h"
 #include <pthread.h>
 
-/* Update SERVER_HOST to be the IP address of
- * the chat server you are connecting to
- */
 /* arthur.cs.columbia.edu */
 #define SERVER_HOST "128.59.19.114"
 #define SERVER_PORT 42000

@@ -223,7 +223,7 @@ void *network_thread_f(void *ignored)
 		recvBuf[n] = '\0';
 		printf("%s", recvBuf);
 		//fbputs(recvBuf, 8, 0);
-		char* ptr = screen[19];
+		char* ptr = screen[SEPREATOR_ROW - 2];
 		int len = strlen(recvBuf);
 		int line = len / COLS + 1;
 		shift_chat(line);

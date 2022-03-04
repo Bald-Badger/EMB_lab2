@@ -128,18 +128,7 @@ void fbclear() {
 	}
 }
 
-
-// (row * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length +
-void scroll_one_row_old (int row, int line) {
-	int row_offset = (line * FONT_HEIGHT * 2 + fb_vinfo.yoffset) * fb_finfo.line_length;
-	unsigned char *source = get_pixel_index(row, 0);
-	unsigned char *dest = get_pixel_index(row-line, 0);
-	for (int y = 0 ; y < FONT_HEIGHT * 2 ; y++) {
-		int offset = y * row_offset;
-		memmove(dest + offset, source + offset, row_offset);
-	}
-}
-
+/*
 void scroll_input_space(int line) {
 	if (line + SEPREATOR_ROW >= ROWS) {
 		printf("cannot row that much!");
@@ -152,7 +141,7 @@ void scroll_input_space(int line) {
 
 	memmove(&framebuffer[base_index], &framebuffer[start_index], end_index - start_index);
 } 
-
+*/
 
 /* 8 X 16 console font from /lib/kbd/consolefonts/lat0-16.psfu.gz
 

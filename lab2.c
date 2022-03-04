@@ -52,8 +52,10 @@ char usb_to_ascii(uint8_t k1) {
 	if (k1 == 0x00){
 		return ASCII_NULL;
 	}
-	// if the key is among a-z
+
 	uint8_t ascii = ASCII_NULL;
+
+	// if the key is among a-z
 	if (KEY_A <= k1 || k1 <= KEY_Z) {
 		ascii = k1 + 93;
 	} 
@@ -63,16 +65,6 @@ char usb_to_ascii(uint8_t k1) {
 	}
 
 	return (char) ascii;
-}
-
-void sanity_test() {
-	/* Draw rows of asterisks across the top and bottom of the screen */
-	for (int col = 0 ; col < 64 ; col++) {
-		fbputchar('*', 0, col);
-		fbputchar('*', 23, col);
-	}
-
-	fbputs("Test Text", 4, 10);
 }
 
 
@@ -276,7 +268,8 @@ void *input_thread_f(void *ignored) {
 			}
 
 			if (packet.keycode[0] == KEY_BACKSPACE) {
-				message[message_ptr] = ASCII_NULL;
+				message[message_ptr+1] = ASCII_NULL;
+				message[message_ptr] = ASCII_UNDERSCORE;
 				cursor --;
 				message_ptr --;
 				refresh();

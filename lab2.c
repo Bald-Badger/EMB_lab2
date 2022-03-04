@@ -46,6 +46,8 @@ void *input_thread_f(void *);
 int CAPS = 0; // 1 if caps lock is on
 int exit_flag = 0; // 1 then exit
 
+unsigned char screen [ROWS][COLS];
+
 char usb_to_ascii(uint8_t k1) {
 	if (k1 == 0x00){
 		return ASCII_NULL;

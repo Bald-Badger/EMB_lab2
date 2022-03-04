@@ -46,7 +46,7 @@ void *input_thread_f(void *);
 int CAPS = 0; // 1 if caps lock is on
 int exit_flag = 0; // 1 then exit
 
-unsigned char screen [ROWS][COLS];
+char screen [ROWS][COLS];
 
 char usb_to_ascii(uint8_t k1) {
 	if (k1 == 0x00){
@@ -78,7 +78,7 @@ void sanity_test() {
 
 void refresh() {
 	for (int i = 0; i < ROWS; i++) {
-		fbputs(screen[i], i);
+		fbputs(screen[i], i, 0);
 	}
 }
 
@@ -94,10 +94,10 @@ void clear_screen() {
 void print_canvas() {
 	// draw a hoirizonta line
 	for (int col = 0 ; col < COLS ; col++) {
-		screen[SEPREATOR_ROW][col] = 
-		fbputchar('=', SEPREATOR_ROW, col);
+		screen[SEPREATOR_ROW][col] = "="
+		//fbputchar('=', SEPREATOR_ROW, col);
 	}
-
+	refresh();
 }
 
 

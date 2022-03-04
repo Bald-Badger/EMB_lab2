@@ -60,20 +60,20 @@ char usb_to_ascii(uint8_t mod, uint8_t k1) {
 		}
 	} 
 
-	else if (k1 == KEY_SPACE) {
-		return ASCII_SPACE;
+	if (k1 == KEY_SPACE) {
+		ascii = ASCII_SPACE;
 	}
 
-	else if (k1 == KEY_DOT) {
-		return 0x2E;
+	if (k1 == KEY_DOT) {
+		ascii = ASCII_DOT;
 	}
 
-	else if (k1 == KEY_COMMA) {
-		return 0x2C;
+	if (k1 == KEY_COMMA) {
+		ascii = ASCII_COMMA;
 	}
 
-	else if (k1 == KEY_APOSTROPHE) {
-		return 0x27;
+	if (k1 == KEY_APOSTROPHE) {
+		ascii = ASCII_APOSTROPHE;
 	}
 
 	return (char) ascii;

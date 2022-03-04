@@ -243,6 +243,8 @@ extern void scroll_one_row(int, int);
 #define ASCII_1 0x31
 #define ASCII_SPACE 0x20
 #define ASCII_UNDERSCORE 0x5f
-
+#define ASCII_DOT 0x2E
+#define ASCII_COMMA 0x2C
+#define ASCII_APOSTROPHE 0x27
 
 #endif

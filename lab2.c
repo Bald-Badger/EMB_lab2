@@ -264,5 +264,5 @@ void *input_thread_f(void *ignored) {
 			}
 		}
 	}
-	return NULL;
+	return NULL; 
 }
